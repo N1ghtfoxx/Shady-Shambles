@@ -44,7 +44,6 @@ app.post('/login', async(req, res) => {
     }
 });
 
-
 // start the server and listen on port 3000
 const PORT = 3000;
 app.listen(PORT, () => {

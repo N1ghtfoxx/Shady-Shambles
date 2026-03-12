@@ -12,5 +12,5 @@ connection.connect((err) => {
     if(err) throw err;
     console.log('Datenbank-Verbindung steht!');
 });
-// export database connection so it can be used in other files
-module.exports = connection;
+// export the connection as a promise to allow for async/await usage in other files
+module.exports = connection.promise();
