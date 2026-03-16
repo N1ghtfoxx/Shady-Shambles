@@ -6,7 +6,13 @@ document.getElementById('registerBtn').addEventListener('click', () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: userName, password: passWord })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (response.ok) {
+            document.getElementById('UN').value = '';
+            document.getElementById('PW').value = '';          
+        }
+        return response.json();
+    })
     .then(data => {
         console.log(data);
     });

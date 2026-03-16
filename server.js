@@ -1,11 +1,17 @@
 const express = require('express');
 const db = require('./db'); // import the database connection from db.js
 const bcrypt = require('bcrypt'); // import bcrypt for password hashing
+const expressSession = require('express-session'); // import express-session for session management
 
 const app = express(); // create an instance of the Express application
 
 app.use(express.json()); // allows server to read JSON from frontend
 app.use(express.static('public'));
+app.use(expressSession({
+    secret: 'your_secret_key', // replace with a secure secret key in production
+    resave: false,
+    saveUninitialized: true,
+}));
 
 // define a POST route for user registration
 app.post('/register', async(req, res) => {
@@ -39,6 +45,7 @@ app.post('/login', async(req, res) => {
         const isMatch = await bcrypt.compare(password, rows[0].password);
         if (!isMatch)
             return res.status(401).json({ message: 'Ungültige Anmeldedaten!' });
+        req.session.actor_id = rows[0].actor_id;
         return res.status(200).json({ message: 'Login erfolgreich!' });
     } catch (err) {
     return res.status(500).json({ message: 'Datenbankfehler: Fehler bei der Anmeldung!' });

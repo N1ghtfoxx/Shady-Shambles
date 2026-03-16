@@ -6,8 +6,13 @@ document.getElementById('loginBtn').addEventListener('click', () => {
         headers: { 'Content-Type': 'application/json' },                                                    
         body: JSON.stringify({ username: userName, password: passWord })     
     })                         
-    .then(response => response.json() )               
-    .then(data => {                           
-        console.log(data.message);               
-    });   
+    .then(response => {
+        if (response.ok) {
+            window.location.href = 'home.html'; // Redirect to home.html after successful login
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.message);
+    });
 });
