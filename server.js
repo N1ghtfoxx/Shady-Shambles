@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('./db'); // import the database connection from db.js
+const bcrypt = require('bcrypt'); // import bcrypt for password hashing
 
 const app = express(); // create an instance of the Express application
 
@@ -38,7 +39,7 @@ app.post('/login', async(req, res) => {
         const isMatch = await bcrypt.compare(password, rows[0].password);
         if (!isMatch)
             return res.status(401).json({ message: 'Ungültige Anmeldedaten!' });
-        return res.status(200).json({ message: 'Anmeldung erfolgreich!' });
+        return res.status(200).json({ message: 'Login erfolgreich!' });
     } catch (err) {
     return res.status(500).json({ message: 'Datenbankfehler: Fehler bei der Anmeldung!' });
     }
