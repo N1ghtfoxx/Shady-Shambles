@@ -11,6 +11,9 @@ fetch('/home', {
         button.style.backgroundImage = merchant.merchant_sprite; // Set the background image of the button to the merchant's sprite
         // insert button into main element of home.html
         document.getElementById('homeMain').appendChild(button);
+        button.addEventListener('click', () => {
+            window.location.href = 'merchant.html?name=' + merchant.name; // Redirect to merchant.html with the merchant's name as a query parameter
+        });
     });
     document.getElementById('inventoryBtn').addEventListener('click', () => {
         window.location.href = 'inventory.html';
