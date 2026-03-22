@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<!-- head-Inhalte sind nur für den Browser und die Suchmaschinen gedacht 
+			 und NICHT für den Anwender - Ausnahme: titel für Tabs und Lesezeichen -->
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>
+			Merchant Page
+		</title>
+		<!-- link rel="stylesheet" href="style/style.css"-->
+		<style>
+			/* Bereich für ergänzende, Seiten-spezifische CSS-Einstellungen */
+		</style>
+		<script>
+			/* Bereich für Seiten-spezifische JavaScript-Definitionen */
+		</script>
+	</head>
+	<body>
+		<!-- body-Inhalte werden dem Anwender im Viewport angezeigt -->
+		<header>
+			<h1 id="merchantName"></h1>
+			<button type="submit" name="home" id="homeBtn" value="home">Home</button>
+		</header>		
+		<main id="merchMain">
+			<section id="merchantGrid">
+                <!-- merchant items -->
+                <p id="itemDescription"></p>
+            </section>
+            <section id="playerGrid">
+                <!-- player items -->
+                <p id="gold"></p>
+            </section>
+		</main>
+        <aside>
+            <!-- list with items in player's cart -->
+            <!-- total price -->
+            <button type="submit" name="buy" id="buyBtn" value="buy">buy</button>
+            <button type="submit" name="sell" id="sellBtn" value="sell">sell</button>
+        </aside>	
+		<footer>Fußleiste mit rechtlich relevanten Links</footer>
+		<script src="merchant.js"></script>
+	</body>
+</html>
