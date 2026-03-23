@@ -23,21 +23,29 @@
 			<button type="submit" name="home" id="homeBtn" value="home">Home</button>
 		</header>		
 		<main id="merchMain">
-			<section id="merchantGrid">
-                <!-- merchant items -->
-                <p id="itemDescription"></p>
-            </section>
-            <section id="playerGrid">
-                <!-- player items -->
-                <p id="gold"></p>
-            </section>
+			<section id="merchantSection">
+				<article id="merchantGrid">
+					<!-- merchant items -->
+					<p id="itemDescription"></p>
+            	</article>
+				<article id="playerGrid">
+					<!-- player items -->
+					<p id="gold"></p>
+				</article>
+        	</section>
 		</main>
-        <aside>
-            <!-- list with items in player's cart -->
-            <!-- total price -->
-            <button type="submit" name="buy" id="buyBtn" value="buy">buy</button>
-            <button type="submit" name="sell" id="sellBtn" value="sell">sell</button>
-        </aside>	
+        <aside id="cartAside">
+            <section id="cartSection">
+				<article id="cartItems">
+					<!-- list of cart items -->
+				</article>			
+				<article id="cartSummary">
+					<p id="totalPrice"></p>
+					<button type="submit" name="buy" id="buyBtn" value="buy">buy</button>
+					<button type="submit" name="sell" id="sellBtn" value="sell">sell</button>
+				</article>
+			</section>
+		</aside>
 		<footer>Fußleiste mit rechtlich relevanten Links</footer>
 		<script src="merchant.js"></script>
 	</body>

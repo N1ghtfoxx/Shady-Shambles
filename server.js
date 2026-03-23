@@ -113,17 +113,58 @@ app.get('/merchant', async(req, res) => {
         const [playerRows] = await db.query('SELECT gold  FROM player  INNER JOIN actor ON player.actor_id = actor.id WHERE player.actor_id = ?', [actorId]);
         // fetch the complete inventory of the player by joining the item and inventory tables based on the actor_id stored in the session
         const [inventoryRows] = await db.query('SELECT id, name, base_value, item_type, description, item_sprite, inventory.quantity FROM item INNER JOIN inventory ON item.id = inventory.item_id WHERE inventory.actor_id = ?', [actorId]);
-        return res.status(200).json({ mName: merchantName, mInventory: merchInvRows, gold: playerRows[0].gold, inventory: inventoryRows });
+        return res.status(200).json({ mName: merchantName, mActorId: merchantActorId, mInventory: merchInvRows, gold: playerRows[0].gold, inventory: inventoryRows });
     } catch (err) {
         console.log('Fehler bei /merchant?name:', err);
         return res.status(500).json({ message: 'Datenbankfehler: Fehler beim Laden der Händler-Seite!' }); 
     }
 });
-    
 
-
-
-  
+// define a POST route for trading between player and merchant
+app.post('/trade', async(req, res) => {
+    const { mode, items, mActorId } = req.body;
+    const actorId = req.session.actor_id;
+    if (!actorId)
+        return res.status(401).json({ message: 'Nicht angemeldet!' });
+    try {
+        await db.query('START TRANSACTION');
+        const sellerId = mode === 'buy' ? mActorId : actorId;
+        const buyerId = mode === 'buy' ? actorId : mActorId;
+        let total = 0;
+        for (const item of items) {
+            const [itemRows] = await db.query('SELECT base_value FROM item WHERE id = ?', [item.id]);
+            const itemPrice = itemRows[0].base_value * item.quantity;
+            total += itemPrice;
+            await db.query('INSERT INTO trading (seller_id, buyer_id, item_id, quantity, price_total) VALUES (?, ?, ?, ?, ?)', [sellerId, buyerId, item.id, item.quantity, itemPrice]);
+        }
+        // transfer gold between player and merchant based on the trade mode (buy or sell)
+        if (mode === 'buy') {
+            await db.query('UPDATE actor SET gold = gold+? WHERE id=?', [total, mActorId]);
+            await db.query('UPDATE actor SET gold = gold-? WHERE id=?', [total, actorId]);
+        } else {
+            await db.query('UPDATE actor SET gold = gold-? WHERE id=?', [total, mActorId]);
+            await db.query('UPDATE actor SET gold = gold+? WHERE id=?', [total, actorId]);
+        }
+        // transfer items between player and merchant based on the trade mode (buy or sell)
+        if (mode === 'buy') {
+            for (const item of items) {
+                await db.query('UPDATE inventory SET quantity = quantity - ? WHERE actor_id = ? AND item_id = ?', [item.quantity, mActorId, item.id]);
+                await db.query('INSERT INTO inventory (actor_id, item_id, quantity) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE quantity = quantity + ?', [actorId, item.id, item.quantity, item.quantity]);
+            }
+        } else {
+            for (const item of items) {
+                await db.query('UPDATE inventory SET quantity = quantity - ? WHERE actor_id = ? AND item_id = ?', [item.quantity, actorId, item.id]);
+                await db.query('INSERT INTO inventory (actor_id, item_id, quantity) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE quantity = quantity + ?', [mActorId, item.id, item.quantity, item.quantity]);
+            }
+        }
+        await db.query('COMMIT');
+        return res.status(200).json({ message: 'Handel erfolgreich!', total: total });
+    } catch(err) {
+        await db.query('ROLLBACK');
+        console.log('Fehler beim Handel:', err);
+        return res.status(500).json({ message: 'Fehler beim Handel!' });
+    }
+});
 
 // start the server and listen on port 3000
 const PORT = 3000;
