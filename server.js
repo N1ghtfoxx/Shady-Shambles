@@ -130,11 +130,23 @@ app.post('/trade', async(req, res) => {
         await db.query('START TRANSACTION');
         const sellerId = mode === 'buy' ? mActorId : actorId;
         const buyerId = mode === 'buy' ? actorId : mActorId;
+
         let total = 0;
         for (const item of items) {
             const [itemRows] = await db.query('SELECT base_value FROM item WHERE id = ?', [item.id]);
             const itemPrice = itemRows[0].base_value * item.quantity;
             total += itemPrice;
+        }
+        if (mode === 'buy') {
+            const [playerRows] = await db.query('SELECT gold FROM actor WHERE id = ?', [actorId]);
+            if (playerRows[0].gold < total) {
+                await db.query('ROLLBACK');
+                return res.status(400).json({ message: 'Nicht genügend Gold für diesen Handel!' });
+            }
+        }
+        for (const item of items) {
+            const [itemRows] = await db.query('SELECT base_value FROM item WHERE id = ?', [item.id]);
+            const itemPrice = itemRows[0].base_value * item.quantity;
             await db.query('INSERT INTO trading (seller_id, buyer_id, item_id, quantity, price_total) VALUES (?, ?, ?, ?, ?)', [sellerId, buyerId, item.id, item.quantity, itemPrice]);
         }
         // transfer gold between player and merchant based on the trade mode (buy or sell)
