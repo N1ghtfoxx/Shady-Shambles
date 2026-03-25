@@ -18,6 +18,15 @@ app.use(expressSession({
     saveUninitialized: true,
 }));
 
+app.get('/', (req, res) => {
+    const actorId = req.session.actor_id; // check if the user is logged in by checking for an actor_id in the session
+    if (!actorId) {
+        res.redirect('/login.html'); // if not logged in, redirect to the login page
+    } else {
+        res.redirect('/home.html'); // if logged in, redirect to the home page
+    }
+});
+
 // define a POST route for user registration
 app.post('/register', async(req, res) => {
     const { username, password } = req.body; // get username and password from the request body
