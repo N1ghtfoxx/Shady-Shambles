@@ -43,11 +43,14 @@ fetch('/merchant?name=' + merchantName, {
     
         const availableItem = cart.find(cartItem => cartItem.id === item.id);
         if (availableItem) {
-            availableItem.quantity++;
+            if (availableItem.quantity >= item.quantity) {
+                alert("Maximum reached!");
+            } else {
+                availableItem.quantity++;
+            }
         } else {
             cart.push({ id: item.id, name: item.name, quantity: 1 });
         }
-    
         renderCart();
         });
 

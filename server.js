@@ -193,18 +193,45 @@ app.post('/trade', async(req, res) => {
             const itemPrice = itemRows[0].base_value * item.quantity;
             total += itemPrice;
         }
+
         if (mode === 'buy') {
+            // Check if the merchant has enough items in stock for the trade
+            for (const item of items) {
+                const [inventoryRows] = await db.query('SELECT quantity FROM inventory WHERE actor_id = ? AND item_id = ?', [mActorId, item.id]);
+                if (inventoryRows[0].quantity < item.quantity) {
+                    await db.query('ROLLBACK');
+                    return res.status(400).json({ message: 'Nicht genügend Artikel auf Lager!' });
+                }
+            }
+        }
+
+        if (mode === 'sell') {
+            // Check if the player has enough items in stock for the trade
+            for (const item of items) {
+                const [inventoryRows] = await db.query('SELECT quantity FROM inventory WHERE actor_id = ? AND item_id = ?', [actorId, item.id]);
+                if (inventoryRows[0].quantity < item.quantity) {
+                    await db.query('ROLLBACK');
+                    return res.status(400).json({ message: 'Nicht genügend Artikel im Inventar!' });
+                }
+            }
+        }
+
+        if (mode === 'buy') {
+            // Check if the player has enough gold for the trade
             const [playerRows] = await db.query('SELECT gold FROM actor WHERE id = ?', [actorId]);
             if (playerRows[0].gold < total) {
                 await db.query('ROLLBACK');
                 return res.status(400).json({ message: 'Nicht genügend Gold für diesen Handel!' });
             }
         }
+
+        // Record the trade in the trading table for each item involved in the trade
         for (const item of items) {
             const [itemRows] = await db.query('SELECT base_value FROM item WHERE id = ?', [item.id]);
             const itemPrice = itemRows[0].base_value * item.quantity;
             await db.query('INSERT INTO trading (seller_id, buyer_id, item_id, quantity, price_total) VALUES (?, ?, ?, ?, ?)', [sellerId, buyerId, item.id, item.quantity, itemPrice]);
         }
+
         // transfer gold between player and merchant based on the trade mode (buy or sell)
         if (mode === 'buy') {
             await db.query('UPDATE actor SET gold = gold+? WHERE id=?', [total, mActorId]);
@@ -213,6 +240,7 @@ app.post('/trade', async(req, res) => {
             await db.query('UPDATE actor SET gold = gold-? WHERE id=?', [total, mActorId]);
             await db.query('UPDATE actor SET gold = gold+? WHERE id=?', [total, actorId]);
         }
+
         // transfer items between player and merchant based on the trade mode (buy or sell)
         if (mode === 'buy') {
             for (const item of items) {
@@ -225,6 +253,7 @@ app.post('/trade', async(req, res) => {
                 await db.query('INSERT INTO inventory (actor_id, item_id, quantity) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE quantity = quantity + ?', [mActorId, item.id, item.quantity, item.quantity]);
             }
         }
+        
         await db.query('COMMIT');
         return res.status(200).json({ message: 'Handel erfolgreich!', total: total });
     } catch(err) {
