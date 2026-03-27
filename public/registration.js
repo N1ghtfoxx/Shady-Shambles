@@ -7,13 +7,17 @@ document.getElementById('registerBtn').addEventListener('click', () => {
         body: JSON.stringify({ username: userName, password: passWord })
     })
     .then(response => {
-        if (response.ok) {
-            document.getElementById('UN').value = '';
-            document.getElementById('PW').value = '';          
-        }
-        return response.json();
+        return response.json().then(data => {
+            return { ok: response.ok, data: data };
+        });
     })
-    .then(data => {
-        console.log(data);
+    .then(result => {
+        if (result.ok) {
+            document.getElementById('UN').value = '';
+            document.getElementById('PW').value = '';
+            window.location.href = 'login.html';
+        } else {
+            alert(result.data.message);
+        }
     });
 });

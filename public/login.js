@@ -7,12 +7,15 @@ document.getElementById('loginBtn').addEventListener('click', () => {
         body: JSON.stringify({ username: userName, password: passWord })     
     })                         
     .then(response => {
-        if (response.ok) {
-            window.location.href = 'home.html'; // Redirect to home.html after successful login
-        }
-        return response.json();
+        return response.json().then(data => {
+            return { ok: response.ok, data: data };
+        });
     })
-    .then(data => {
-        console.log(data.message);
+    .then(result => {
+        if (result.ok) {
+            window.location.href = 'home.html';
+        } else {
+            alert(result.data.message);
+        }
     });
 });
