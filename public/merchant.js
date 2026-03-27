@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search); // Get the merchant's name from the URL query parameters
 const merchantName = params.get('name');
-const cart = []; // Array to hold items added to the cart for buying or selling
+let cart = []; // Array to hold items added to the cart for buying or selling
 let cartMode = null; // 'buy' oder 'sell'
 let merchantActorId = null;
 
@@ -10,7 +10,17 @@ function renderCart() {
         const p = document.createElement('p');
         p.textContent = `${cartItem.name} (x${cartItem.quantity})`;
         document.getElementById('cartItems').appendChild(p);
-    });
+		const minus = document.createElement('button');
+		minus.textContent = '-';
+		document.getElementById('cartItems').appendChild(minus);
+		minus.addEventListener('click', () => {
+			cartItem.quantity--;
+			if (cartItem.quantity === 0) {
+				cart = cart.filter(i => i.quantity > 0);
+			}
+			renderCart();
+		});
+	});
 }
 
 fetch('/merchant?name=' + merchantName, { 
