@@ -2,11 +2,11 @@ const express = require('express');
 const db = require('./db'); // import the database connection from db.js
 const bcrypt = require('bcrypt'); // import bcrypt for password hashing
 const expressSession = require('express-session'); // import express-session for session management
+const path = require('path'); // import path module for handling file paths
 
 const app = express(); // create an instance of the Express application
 
 app.use(express.json()); // allows server to read JSON from frontend
-app.use(express.static('public'));
 
 // Set up session management:
 // - secret: A key to keep the session secure
@@ -18,6 +18,51 @@ app.use(expressSession({
     saveUninitialized: true,
 }));
 
+app.get('/home.html', (req, res) => {    
+   const actorId = req.session.actor_id;   
+   if (!actorId) {         
+        res.redirect('/login.html');    
+   } else {         
+        res.sendFile(path.join(__dirname, 'public', 'home.html'));    
+   } 
+});
+
+app.get('/inventory.html', (req, res) => {
+	const actorId = req.session.actor_id;
+	if (!actorId) {
+		res.redirect('/login.html');
+	} else {
+		res.sendFile(path.join(__dirname, 'public', 'inventory.html'));
+	}
+});
+
+app.get('/merchant.html', (req, res) => {
+	const actorId = req.session.actor_id;
+	if (!actorId) {
+		res.redirect('/login.html');
+	} else {
+		res.sendFile(path.join(__dirname, 'public', 'merchant.html'));
+	}
+});
+
+app.get('/login.html', (req, res) => {
+	const actorId = req.session.actor_id;
+	if (!actorId) {
+		res.sendFile(path.join(__dirname, 'public', 'login.html'));
+	} else {
+		res.redirect('/home.html');
+	}
+});
+
+app.get('/registration.html', (req, res) => {
+	const actorId = req.session.actor_id;
+	if (!actorId) {
+		res.sendFile(path.join(__dirname, 'public', 'registration.html'));
+	} else {
+		res.redirect('/home.html');
+	}
+});
+
 app.get('/', (req, res) => {
     const actorId = req.session.actor_id; // check if the user is logged in by checking for an actor_id in the session
     if (!actorId) {
@@ -26,6 +71,8 @@ app.get('/', (req, res) => {
         res.redirect('/home.html'); // if logged in, redirect to the home page
     }
 });
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // define a POST route for user registration
 app.post('/register', async(req, res) => {
