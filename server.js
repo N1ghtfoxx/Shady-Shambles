@@ -142,7 +142,7 @@ app.get('/inventory', async(req, res) => {
         // fetch gold of the player based on the actor_id stored in the session
         const [playerRows] = await db.query('SELECT gold  FROM player  INNER JOIN actor ON player.actor_id = actor.id WHERE player.actor_id = ?', [actorId]);
         // fetch the complete inventory of the player by joining the item and inventory tables based on the actor_id stored in the session
-        const [inventoryRows] = await db.query('SELECT id, name, base_value, item_type, description, item_sprite, inventory.quantity FROM item INNER JOIN inventory ON item.id = inventory.item_id WHERE inventory.actor_id = ?', [actorId]);
+        const [inventoryRows] = await db.query('SELECT id, name, base_value, item_type, description, item_sprite, inventory.quantity FROM item INNER JOIN inventory ON item.id = inventory.item_id WHERE inventory.actor_id = ? AND inventory.quantity > 0', [actorId]);
         // gold, and the complete player inventory-data as a JSON response
         return res.status(200).json({  gold: playerRows[0].gold, inventory: inventoryRows });
     } catch (err) {
@@ -164,11 +164,11 @@ app.get('/merchant', async(req, res) => {
         const [merchantRows] = await db.query('SELECT name, actor_id FROM merchant WHERE merchant.name = ?', [merchantName]);
         const merchantActorId = merchantRows[0].actor_id;
         // fetch the complete inventory of requested merchant
-        const [merchInvRows] = await db.query('SELECT id, name, base_value, item_type, description, item_sprite, inventory.quantity FROM item INNER JOIN inventory ON item.id = inventory.item_id WHERE inventory.actor_id = ?', [merchantActorId]);
+        const [merchInvRows] = await db.query('SELECT id, name, base_value, item_type, description, item_sprite, inventory.quantity FROM item INNER JOIN inventory ON item.id = inventory.item_id WHERE inventory.actor_id = ? AND inventory.quantity > 0', [merchantActorId]);
         // fetch gold of the player based on the actor_id stored in the session
         const [playerRows] = await db.query('SELECT gold  FROM player  INNER JOIN actor ON player.actor_id = actor.id WHERE player.actor_id = ?', [actorId]);
         // fetch the complete inventory of the player by joining the item and inventory tables based on the actor_id stored in the session
-        const [inventoryRows] = await db.query('SELECT id, name, base_value, item_type, description, item_sprite, inventory.quantity FROM item INNER JOIN inventory ON item.id = inventory.item_id WHERE inventory.actor_id = ?', [actorId]);
+        const [inventoryRows] = await db.query('SELECT id, name, base_value, item_type, description, item_sprite, inventory.quantity FROM item INNER JOIN inventory ON item.id = inventory.item_id WHERE inventory.actor_id = ? AND inventory.quantity > 0', [actorId]);
         return res.status(200).json({ mName: merchantName, mActorId: merchantActorId, mInventory: merchInvRows, gold: playerRows[0].gold, inventory: inventoryRows });
     } catch (err) {
         console.log('Fehler bei /merchant?name:', err);
@@ -253,7 +253,7 @@ app.post('/trade', async(req, res) => {
                 await db.query('INSERT INTO inventory (actor_id, item_id, quantity) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE quantity = quantity + ?', [mActorId, item.id, item.quantity, item.quantity]);
             }
         }
-        
+
         await db.query('COMMIT');
         return res.status(200).json({ message: 'Handel erfolgreich!', total: total });
     } catch(err) {
