@@ -1,0 +1,17 @@
+:root {
+    /* Colors */
+    --color-bg: #000000;
+    --color-panel: #3F352D;
+    --color-input: #4C443F;
+    --color-text: #BDAB9D;
+    --color-accent: #9A7F6A ;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    text-align: center ;
+    height: 100vh ;
+    display: flex ;
+    flex-direction: column ;
+}
