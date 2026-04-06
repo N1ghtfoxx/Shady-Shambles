@@ -1,0 +1,73 @@
+body {
+    display: grid ;
+    grid-template-columns: 1fr 250px ;
+    grid-template-rows: auto 1fr auto ;
+    grid-template-areas: 
+        "header header"
+        "main aside"
+        "footer footer" ;
+    min-height: 100vh ;
+    /*background-image: url('../img/Hintergrund1_bearbeitet.jpg');
+    background-size: cover ;
+    background-position: center ;
+    background-repeat: no-repeat ;
+*/
+}
+
+header { 
+    grid-area: header ;
+    padding: 1rem ;
+}
+
+main {
+    grid-area: main ;
+    position: relative;
+    padding: 1rem ;
+    background-image: url('../img/Hintergrund1_bearbeitet.jpg');
+    background-size: cover ;
+    background-position: center ;
+    background-repeat: no-repeat;
+}
+
+.blacksmith {
+    position: absolute;
+    top: 50% ;
+    left: 25% ;
+}
+
+.alchemist {
+    position: absolute;
+    top: 50% ;
+    left: 78% ;
+}
+
+.armourer {
+    position: absolute;
+    top: 50% ;
+    left: 56% ;
+}
+
+aside {
+    grid-area: aside ;
+    /*padding: 1rem ;*/
+    background-color: var(--color-panel);
+    display: flex ;
+    flex-direction: column ;
+    align-items: center ;
+    gap: 2rem ;
+    padding-top: 2rem ;
+}
+
+/* aside p, aside button {
+    margin-bottom: 3rem ;
+}
+*/
+
+aside button {
+    width: fit-content ;
+}
+
+footer {
+    grid-area: footer ;
+    padding: 0 ;
+}

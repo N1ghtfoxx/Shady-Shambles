@@ -9,6 +9,8 @@ fetch('/home', {
         const button = document.createElement('button');
         button.textContent = merchant.name;
         button.style.backgroundImage = merchant.merchant_sprite; // Set the background image of the button to the merchant's sprite
+        button.classList.add('merchant-button'); // Add a class for styling
+        button.classList.add(merchant.name); // Add a class with the merchant's name for specific styling if needed
         // insert button into main element of home.html
         document.getElementById('homeMain').appendChild(button);
         button.addEventListener('click', () => {
