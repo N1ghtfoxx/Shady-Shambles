@@ -39,11 +39,14 @@ fetch('/merchant?name=' + merchantName, {
     // </summary>
     data.mInventory.forEach(item => { // Merchants Inventory 
         const merchantItemContainer = document.createElement('button');
-        merchantItemContainer.textContent = item.name + ` (x${item.quantity}) - ${item.base_value} Gold`;
+        const quantity = document.createElement('span');
+        quantity.textContent = item.quantity;
+        merchantItemContainer.appendChild(quantity);
+        merchantItemContainer.style.backgroundImage = `url('${item.item_sprite}')`;
         document.getElementById('merchantGrid').appendChild(merchantItemContainer);
 
         merchantItemContainer.addEventListener('click', () => {
-        document.getElementById('itemDescription').textContent = item.description;
+        document.getElementById('itemDescription').textContent = `${item.name}: ${item.description} - Price: ${item.base_value} Gold`;
         if (cartMode === 'sell') {
             cart.length = 0; // Clear the cart if switching from sell to buy mode
         }
@@ -101,6 +104,7 @@ fetch('/merchant?name=' + merchantName, {
     data.inventory.forEach(item => { // Players Inventory
         const playerItemContainer = document.createElement('button');
         playerItemContainer.textContent = item.name + ` (x${item.quantity})`;
+        playerItemContainer.style.backgroundImage = `url('${item.item_sprite}')`;
         document.getElementById('playerGrid').appendChild(playerItemContainer);
 
         playerItemContainer.addEventListener('click', () => {

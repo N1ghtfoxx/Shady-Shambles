@@ -6,7 +6,7 @@ fetch('/inventory', {
     data.inventory.forEach(item => {
         const itemContainer = document.createElement('button');
         itemContainer.textContent = `${item.name} (x${item.quantity})`;
-        // button.style.backgroundImage = item.item_sprite; // Set the background image of the button to the item's sprite
+        itemContainer.style.backgroundImage = `url('${item.item_sprite}')`;
         // insert button into main element of inventory.html
         document.getElementById('inMain').appendChild(itemContainer);
     }); 
