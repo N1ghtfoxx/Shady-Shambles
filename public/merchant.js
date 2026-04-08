@@ -4,6 +4,8 @@ let cart = []; // Array to hold items added to the cart for buying or selling
 let cartMode = null; // 'buy' oder 'sell'
 let merchantActorId = null;
 
+renderCart(); // Initial call to render the cart, which will be empty at the start
+
 function renderCart() {
     document.getElementById('cartItems').innerHTML = '';
     cart.forEach(cartItem => { 
@@ -21,6 +23,11 @@ function renderCart() {
 			renderCart();
 		});
 	});
+    let total = 0;
+    cart.forEach(cartItem => {
+        total += cartItem.base_value * cartItem.quantity;
+    });
+    document.getElementById('totalPrice').textContent = `Total: ${total} Gold`;
 }
 
 fetch('/merchant?name=' + merchantName, { 
@@ -62,7 +69,7 @@ fetch('/merchant?name=' + merchantName, {
                 availableItem.quantity++;
             }
         } else {
-            cart.push({ id: item.id, name: item.name, quantity: 1 });
+            cart.push({ id: item.id, name: item.name, quantity: 1, base_value: item.base_value });
         }
         renderCart();
         });
@@ -126,7 +133,7 @@ fetch('/merchant?name=' + merchantName, {
                 availableItem.quantity++;
             }
         } else {
-            cart.push({ id: item.id, name: item.name, quantity: 1 });
+            cart.push({ id: item.id, name: item.name, quantity: 1, base_value: item.base_value });
         }
         renderCart();
         });
