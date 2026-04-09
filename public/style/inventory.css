@@ -1,0 +1,27 @@
+body {
+    display: grid;
+    grid-template-columns: 1fr ;
+    grid-template-rows: auto 1fr auto ;
+    grid-template-areas: 
+        "header"
+        "main"
+        "footer" ;
+}
+
+header { 
+    grid-area: header ;
+    display: flex ;
+    flex-direction: row ;
+    justify-content: space-around ;
+}
+
+main {
+    grid-area: main ;
+    display: flex ;
+    flex-direction: row ;
+    justify-content: space-around;
+}
+
+footer {
+    grid-area: footer ;
+}
