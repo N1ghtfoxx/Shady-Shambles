@@ -5,10 +5,12 @@ fetch('/inventory', {
     document.getElementById('gold').textContent = `Gold: ${data.gold}`;
     data.inventory.forEach(item => {
         const itemContainer = document.createElement('button');
-        itemContainer.textContent = `${item.name} (x${item.quantity})`;
+        const quantity = document.createElement('span');
+        quantity.textContent = item.quantity;
+        itemContainer.appendChild(quantity);
         itemContainer.style.backgroundImage = `url('${item.item_sprite}')`;
         // insert button into main element of inventory.html
-        document.getElementById('inMain').appendChild(itemContainer);
+        document.getElementById('inventoryGrid').appendChild(itemContainer);
     }); 
     document.getElementById('homeBtn').addEventListener('click', () => { 
         window.location.href = 'home.html';});
