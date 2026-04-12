@@ -29,22 +29,34 @@ main {
     background-repeat: no-repeat;
 }
 
+.merchant-button {
+    background-image: url(../img/Button_300.png);
+    background-color: transparent;
+    background-size: 100% ;
+    background-position: center;
+    background-repeat: no-repeat ;
+    width: 110px ;
+    height: 70px;
+    border: none ;
+    color: var(--color-text);
+}
+
 .blacksmith {
     position: absolute;
-    top: 50% ;
-    left: 25% ;
+    top: 47% ;
+    left: 24% ;
 }
 
 .alchemist {
     position: absolute;
-    top: 50% ;
+    top: 47% ;
     left: 78% ;
 }
 
 .armourer {
     position: absolute;
-    top: 50% ;
-    left: 56% ;
+    top: 47% ;
+    left: 55% ;
 }
 
 aside {
@@ -84,22 +96,27 @@ footer {
         background-repeat: no-repeat;
     }
 
+     .merchant-button {
+        width: 65px ;
+        height: 37px ;
+    }
+
     .blacksmith {
         font-size: 10px ;
-        top: 47% ;
-        left: 22% ;
+        top: 44% ;
+        left: 21% ;
     }
 
     .alchemist {
         font-size: 10px ;
-        top: 47% ;
-        left: 80% ;
+        top: 44% ;
+        left: 79% ;
     }
 
     .armourer {
         font-size: 10px ;
-        top: 47% ;
-        left: 56% ;
+        top: 44% ;
+        left: 55% ;
     }
 
     aside {

@@ -6,6 +6,7 @@ body {
         "header"
         "main"
         "footer" ;
+    
 }
 
 header { 
@@ -26,11 +27,11 @@ main {
 #inventorySection {
     background-image: url(../img/Inventory_300.png);
     width: 960px ;
-    height: 960px ;
+    max-height: 815px ;
     background-size: 100% ;
     background-position: center;
     background-repeat: no-repeat ;
-    overflow: visible;
+    overflow: hidden;
 }
 
 #inventoryGrid {
@@ -39,7 +40,7 @@ main {
     grid-template-columns: repeat(8, 96px) ;
     grid-template-rows: repeat(8, 96px);
     width: 768px ;
-    padding-top: 97px ;
+    padding-top: 28px ;
     padding-left: 95px ;
     text-align: left ;
 }

@@ -19,3 +19,31 @@ body {
     text-align: center ;
     min-height: 100vh ;
 }
+
+h1 {
+    font-size: 2rem ;
+    margin: 1rem 0 ;
+}
+
+#homeBtn {
+    background-image: url(../img/Button_300.png);
+    background-color: transparent;
+    background-size: 100% ;
+    background-position: center;
+    background-repeat: no-repeat ;
+    width: 110px ;
+    border: none ;
+    color: var(--color-text);
+}
+
+#inventoryBtn {
+    background-image: url(../img/Button_300.png);
+    background-color: transparent;
+    background-size: 100% ;
+    background-position: center;
+    background-repeat: no-repeat ;
+    width: 110px ;
+    height: 96px;
+    border: none ;
+    color: var(--color-text);
+}
