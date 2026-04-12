@@ -55,6 +55,7 @@ main {
     width: 96px ;
     height: 96px ;
     background-color: transparent ;
+    background-size: 100% ;
     border: none ;
     position: relative;
 }
@@ -93,6 +94,7 @@ main {
     width: 96px ;
     height: 96px ;
     background-color: transparent ;
+    background-size: 100% ;
     border: none;
     position: relative;
 }
@@ -148,4 +150,66 @@ aside {
 
 footer {
     grid-area: footer ;
+}
+
+/* Responsive Design for Notebooks (screen size: 1920px with scale factor: 0.6) */
+@media (max-width: 1536px) {
+
+    #merchantInfo {
+        width: 288px ;
+        height: 403px ;
+    }
+
+    #merchantSection {
+        width: 288px ;
+        height: 403px ;
+    }
+
+    #merchantGrid {
+        grid-template-columns: repeat(4, 58px) ;
+        grid-template-rows: repeat(6, 58px);
+        width: 232px ;
+        height: 348px ;
+        padding-top: 30px ;
+        padding-left: 29px ;
+    }
+
+    #merchantGrid button {
+        width: 58px ;
+        height: 58px ;
+    }
+
+    #merchantGrid button span {
+        font-size: 10px ;
+        bottom: 9px ;
+        right: 12px ;
+    }
+
+    #playerSection {
+        width: 288px ;
+        height: 403px ;
+    }
+
+    #playerGrid {
+        grid-template-columns: repeat(4, 58px) ;
+        width: 232px ;
+        padding-top: 30px ;
+        padding-left: 28px ;
+    }
+
+    #playerGrid button {
+        width: 58px ;
+        height: 58px ;
+    }
+
+    #playerGrid button span {
+        font-size: 10px ;
+        bottom: 9px ;
+        right: 12px ;
+    }
+
+    aside {
+        max-height: 403px ;
+        align-self: center;
+    }
 }

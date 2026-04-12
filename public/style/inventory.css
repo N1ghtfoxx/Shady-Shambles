@@ -47,6 +47,7 @@ main {
     width: 96px ;
     height: 96px ;
     background-color: transparent ;
+    background-size: 100% ;
     border: none ;
     position: relative;
 }
@@ -75,4 +76,30 @@ main {
 
 footer {
     grid-area: footer ;
+}
+
+@media (max-width: 1536px) {
+    #inventorySection {
+        width: 576px ;
+        height: 576px ;
+    }
+
+    #inventoryGrid {
+        grid-template-columns: repeat(8, 58px);
+        grid-template-rows: repeat(8, 58px);
+        width: 464px ;
+        padding-top: 58px ;
+        padding-left: 57px ;
+    }
+
+    #inventoryGrid button {
+        width: 58px ;
+        height: 58px ;
+    }
+
+    #inventoryGrid button span {
+        font-size: 10px ;
+        bottom: 9px ;
+        right: 12px ;
+    }
 }

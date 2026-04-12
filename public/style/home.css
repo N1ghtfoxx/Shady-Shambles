@@ -71,3 +71,40 @@ footer {
     grid-area: footer ;
     padding: 0 ;
 }
+
+@media (max-width: 1536px) {
+
+    main {
+        height: 453px ;
+        margin-top: auto;
+        margin-bottom: auto;
+        background-image: url('../img/Hintergrund1_bearbeitet1.jpg');
+        background-size: cover ;
+        background-position: center ;
+        background-repeat: no-repeat;
+    }
+
+    .blacksmith {
+        font-size: 10px ;
+        top: 47% ;
+        left: 22% ;
+    }
+
+    .alchemist {
+        font-size: 10px ;
+        top: 47% ;
+        left: 80% ;
+    }
+
+    .armourer {
+        font-size: 10px ;
+        top: 47% ;
+        left: 56% ;
+    }
+
+    aside {
+        height: 453px ;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
