@@ -36,3 +36,11 @@ fieldset input {
     width: 50% ;
     padding: 0.5rem ;
 }
+
+.submitBtn {
+    background-color: var(--color-accent);
+    border: 1px solid var(--color-text);
+    border-radius: 4px ;
+    color: var(--color-panel);
+    padding: 0.5rem ;
+}

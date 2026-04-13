@@ -13,6 +13,7 @@ function renderCart() {
         p.textContent = `${cartItem.name} (x${cartItem.quantity})`;
         document.getElementById('cartItems').appendChild(p);
 		const minus = document.createElement('button');
+        minus.classList.add('minus-btn');
 		minus.textContent = '-';
 		document.getElementById('cartItems').appendChild(minus);
 		minus.addEventListener('click', () => {

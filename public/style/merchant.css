@@ -71,6 +71,11 @@ main {
     width: 640px ;
 }
 
+#playerInfo {
+    width: 480px ;
+    height: 672px ;
+}
+
 #playerSection {
     background-image: url(../img/InvMerchPage_300.png);
     width: 480px ;
@@ -129,8 +134,17 @@ aside {
 #cartItems {
     overflow-y: auto ;
     border: 1px solid var(--color-accent);
+    border-radius: 8px ;
     height: 400px ;
     padding: 10px ;
+}
+
+.minus-btn {
+    background-color: var(--color-accent);
+    border: 1px solid var(--color-text);
+    border-radius: 2px ;
+    color: var(--color-panel);
+    padding: 2px 6px ;
 }
 
 #TP {
@@ -138,6 +152,7 @@ aside {
     justify-content: center;
     align-items: center;
     border: 1px solid var(--color-accent);
+    border-radius: 4px ;
     min-height: 2rem;
 }
 
@@ -147,6 +162,14 @@ aside {
     justify-content: center ;
     align-items: space-around ;
     gap: 1rem ;
+}
+
+.tradeBtn {
+    background-color: var(--color-accent);
+    border: 1px solid var(--color-text);
+    border-radius: 4px ;
+    color: var(--color-panel);
+    padding: 0.5rem ;
 }
 
 footer {
@@ -186,6 +209,15 @@ footer {
         right: 6px ;
     }
 
+    #itemDescription {
+        width: 288px ;
+    }
+
+    #playerInfo {
+        width: 288px ;
+        height: 403px ;
+    }
+
     #playerSection {
         width: 288px ;
         height: 403px ;
@@ -212,5 +244,21 @@ footer {
     aside {
         max-height: 403px ;
         align-self: center;
+    }
+
+    .minus-btn {
+        background-color: var(--color-accent);
+        border: 1px solid var(--color-text);
+        border-radius: 2px ;
+        color: var(--color-panel);
+        padding: 2px 6px ;
+    }
+
+    .tradeBtn {
+        background-color: var(--color-accent);
+        border: 1px solid var(--color-text);
+        border-radius: 4px ;
+        color: var(--color-panel);
+        padding: 0.5rem ;
     }
 }
