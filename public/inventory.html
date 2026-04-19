@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
 	<head>
-		<!-- head-Inhalte sind nur für den Browser und die Suchmaschinen gedacht 
-			 und NICHT für den Anwender - Ausnahme: titel für Tabs und Lesezeichen -->
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title>
@@ -10,32 +8,28 @@
 		</title>
 		<link rel="stylesheet" href="style/style.css"/>
 		<link rel="stylesheet" href="style/inventory.css"/>
-		<style>
-			/* Bereich für ergänzende, Seiten-spezifische CSS-Einstellungen */
-		</style>
-		<script>
-			/* Bereich für Seiten-spezifische JavaScript-Definitionen */
-		</script>
 	</head>
 	<body>
-		<!-- body-Inhalte werden dem Anwender im Viewport angezeigt -->
 		<header>
 			<h1>Inventory</h1>
+			<!-- home button: styling comes from style/inventory.css (#homeBtn)-->
 			<button type="submit" name="home" id="homeBtn" value="home">Home</button>
-		</header>
-		
+		</header>		
 		<main id="inMain">
+			<!-- Inventory sprite container; the grid (#inventoryGrid) is positioned on top of it -->
 			<section id="inventorySection">
+				<!-- 8x8 grid; item buttons are inserted here by inventory.js -->
 				<article id="inventoryGrid">
 					<!-- inventory items -->
 				</article>
 			</section>
+			<!-- Gold display next to the inventory; value is set by inventory.js -->
 			<section id="goldSection">
 				<p id="gold"></p>
 			</section>
-		</main>	
-		
+		</main>			
 		<footer>&copy; 2026 Shady Shambles. All rights reserved.</footer>
+		<!-- JS at the end of body: DOM (Document Object Model) is fully loaded before the script runs -->
 		<script src="inventory.js"></script>
 	</body>
 </html>

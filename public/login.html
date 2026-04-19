@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html lang="de">
 	<head>
-		<!-- head-Inhalte sind nur für den Browser und die Suchmaschinen gedacht 
-			 und NICHT für den Anwender - Ausnahme: titel für Tabs und Lesezeichen -->
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title>
 			Login 
 		</title>
-		<!-- <link rel="icon" href="pfad/zu/bild.png" type="image/png" /> -->
 		<link rel="stylesheet" href="style/style.css"/>
 		<link rel="stylesheet" href="style/login.css"/>
-		<style>
-			/* Bereich für ergänzende, Seiten-spezifische CSS-Einstellungen */
-		</style>
 	</head>
 	<body>
-		<!-- body-Inhalte werden dem Anwender im Viewport angezeigt -->
 		<header>
 			<h1>Shady Shambles</h1>
 		</header>
@@ -25,18 +18,20 @@
 				Login
 			</h2>
 			<fieldset>
-				<!-- <legend>Login</legend> -->
 				<label for="UN">Username:</label>
 				<input type="text" name="username" id="UN" placeholder="Username" required/>
 				<label for="PW">Password:</label>
 				<input type="password" name="Password" id="PW" placeholder="Password" required/>
+				<!-- Event-Listener is set in login.js -->
 				<button type="submit" name="Login" id="loginBtn" class="submitBtn" value="login">Login</button>
 			</fieldset>
+			<!-- Link to registration page -->
 			<p>Don't have an account? <a href="registration.html">Register here</a></p>
 		</main>
 		<footer>
 			<p>&copy; 2026 Shady Shambles. All rights reserved.</p>
 		</footer>
+		<!-- JS at the end of body: DOM (Document Object Model) is fully loaded before the script runs -->
         <script src="login.js"></script>
 	</body>
 </html>

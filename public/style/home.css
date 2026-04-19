@@ -7,11 +7,6 @@ body {
         "main aside"
         "footer footer" ;
     min-height: 100vh ;
-    /*background-image: url('../img/Hintergrund1_bearbeitet.jpg');
-    background-size: cover ;
-    background-position: center ;
-    background-repeat: no-repeat ;
-*/
 }
 
 header { 
@@ -61,7 +56,6 @@ main {
 
 aside {
     grid-area: aside ;
-    /*padding: 1rem ;*/
     background-color: var(--color-panel);
     display: flex ;
     flex-direction: column ;
@@ -69,11 +63,6 @@ aside {
     gap: 2rem ;
     padding-top: 2rem ;
 }
-
-/* aside p, aside button {
-    margin-bottom: 3rem ;
-}
-*/
 
 aside button {
     width: fit-content ;
@@ -83,6 +72,8 @@ footer {
     grid-area: footer ;
     padding: 0 ;
 }
+
+/* Responsive Design for Notebooks (screen size: 1920px with scale factor: 0.6) */
 
 @media (max-width: 1536px) {
 

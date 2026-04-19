@@ -1,18 +1,11 @@
 :root {
+    
     /* Colors */
     --color-bg: #000000;
     --color-panel: #3F352D;
     --color-input: #4C443F;
     --color-text: #BDAB9D;
     --color-accent: #9A7F6A ;
-
-    /* Font */
-   /* @font-face {
-        font-family: 'PixelFont';
-        src: url('../fonts/PixelFont.ttf') format('truetype');
-    }
-    --font-family: 'PixelFont', 'Arial', sans-serif ;
-    */
 }
 
 * {

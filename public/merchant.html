@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
 	<head>
-		<!-- head-Inhalte sind nur für den Browser und die Suchmaschinen gedacht 
-			 und NICHT für den Anwender - Ausnahme: titel für Tabs und Lesezeichen -->
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title>
@@ -10,45 +8,50 @@
 		</title>
 		<link rel="stylesheet" href="style/style.css"/>
 		<link rel="stylesheet" href="style/merchant.css"/>
-		<style>
-			/* Bereich für ergänzende, Seiten-spezifische CSS-Einstellungen */
-		</style>
-		<script>
-			/* Bereich für Seiten-spezifische JavaScript-Definitionen */
-		</script>
 	</head>
 	<body>
-		<!-- body-Inhalte werden dem Anwender im Viewport angezeigt -->
+		<!-- Grid layout: header, main (inventories), aside (cart), footer - defined in merchant.css -->
 		<header>
-			<h1 id="merchantName"></h1>
+			<h1 id="merchantName"></h1> <!-- populated by merchant.js-->
 			<button type="submit" name="home" id="homeBtn" value="home">Home</button>
 		</header>		
 		<main id="merchMain">
+			<!-- Left side: merchant inventor +  item description -->
 			<section id="merchantInfo">
 				<section id="merchantSection">
+					<!-- 4x6 grid; buttons are inserted by merchant.js -->
 					<article id="merchantGrid">
 						<!-- merchant items -->
 					</article>
 				</section>
+				<!-- description and price of the last clicked item-->
 				<p id="itemDescription"></p>
 			</section>
+			<!-- Right side: player inventory + gold display -->
 			<section id="playerInfo">
 				<section id="playerSection">
+					<!-- flexible grid (row count depends on inventory size); 
+						 buttons are inserted by merchant.js -->
 					<article id="playerGrid">
 						<!-- player items -->
 					</article>
 				</section>
+				<!-- player's gold; value is set by merchant.js -->
 				<p id="gold"></p>
 			</section>
 		</main>
+		<!-- Cart sidebar: selected items, total price and trade buttons -->
         <aside id="cartAside">
             <section id="cartSection">
+				<!-- cart item list; rebuilt by renderCart() in merchant.ja on every change -->
 				<article id="cartItems">
 					<!-- list of cart items -->
-				</article>	
+				</article>
+				<!-- running total display -->	
 				<article id="TP">
 					<p id="totalPrice"></p>
-				</article>		
+				</article>
+				<!-- trade buttons; both disabled on page load until an item is selected -->		
 				<article id="cartSummary">
 					<button type="submit" name="buy" id="buyBtn" class="tradeBtn" value="buy">buy</button>
 					<button type="submit" name="sell" id="sellBtn" class="tradeBtn" value="sell">sell</button>
@@ -56,6 +59,7 @@
 			</section>
 		</aside>
 		<footer>&copy; 2026 Shady Shambles. All rights reserved.</footer>
+		<!-- JS at the end of body: DOM (Document Object Model) is fully loaded before the script runs -->
 		<script src="merchant.js"></script>
 	</body>
 </html>

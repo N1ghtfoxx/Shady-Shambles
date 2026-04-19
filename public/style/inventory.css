@@ -80,6 +80,8 @@ footer {
     grid-area: footer ;
 }
 
+/* Responsive Design for Notebooks (screen size: 1920px with scale factor: 0.6) */
+
 @media (max-width: 1536px) {
 
     #inventorySection {

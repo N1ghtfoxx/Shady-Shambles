@@ -1,40 +1,35 @@
 <!DOCTYPE html>
 <html lang="de">
 	<head>
-		<!-- head-Inhalte sind nur für den Browser und die Suchmaschinen gedacht 
-			 und NICHT für den Anwender - Ausnahme: titel für Tabs und Lesezeichen -->
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title>
 			Registrierung 
 		</title>
-		<!-- <link rel="icon" href="pfad/zu/bild.png" type="image/png" /> -->
 		<link rel="stylesheet" href="style/style.css"/>
 		<link rel="stylesheet" href="style/login.css"/>
-		<style>
-			/* Bereich für ergänzende, Seiten-spezifische CSS-Einstellungen */
-		</style>
 	</head>
 	<body>
-		<!-- body-Inhalte werden dem Anwender im Viewport angezeigt -->
 		<header>
 			<h1>Shady Shambles</h1>
 		</header>
 		<main>
 			<h2>Registrierung</h2>
 			<fieldset>
-				<!-- <legend>Registration</legend> -->
 				<label for="UN">Username:</label>
 				<input type="text" name="username" id="UN" placeholder="Username" required/>
 				<label for="PW">Password:</label>
 				<input type="password" name="Password" id="PW" placeholder="Password" required/>
+				<!-- Event-Listener from registration.js is attached to this button and handles the registration process-->
 				<button type="submit" name="Register" id="registerBtn" class="submitBtn" value="register">OK</button>
 			</fieldset>
+			<!-- Link to login page -->
 			<p>Already have an account? <a href="login.html">Login here</a></p>
 		</main>
 		<footer>
 			<p>&copy; 2026 Shady Shambles. All rights reserved.</p>
 		</footer>
+		<!-- JS at the end of body: DOM (Document Object Model) is fully loaded before the script runs -->
         <script src="registration.js"></script>
 	</body>
 </html>
