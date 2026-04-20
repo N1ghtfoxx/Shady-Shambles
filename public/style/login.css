@@ -11,6 +11,10 @@ main {
     padding-top: 5rem ;
 }
 
+main p a {
+    color: var(--color-hyperlink);
+}
+
 fieldset {
    background-color: var(--color-panel);
    width: 50% ;
