@@ -25,7 +25,7 @@ Folgende Software muss installiert sein:
 1. XAMPP Control Panel öffnen und **Apache** sowie **MySQL** starten.
 2. Neben MySQL auf **Admin** klicken – der Browser öffnet phpMyAdmin automatisch.
 3. Eine neue Datenbank mit dem Namen `shady_shambles` anlegen.
-4. Die mitgelieferte Datei `shady_shambles.sql` über den Reiter **Importieren** in die neue Datenbank importieren.
+4. Die mitgelieferte Datei `shady_shambles.sql` (zu finden im Ordner `data`) über den Reiter **Importieren** in die neue Datenbank importieren.
 
 ### Schritt 2 – Server starten
 
